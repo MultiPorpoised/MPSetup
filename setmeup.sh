@@ -3,7 +3,16 @@
 pushd "${BASH_SOURCE%/*}/" > /dev/null || exit
 
 # TODO: install necessary packages
+sudo apt-get update
+sudo apt-get install python3 python3-venv
 
+# Set up default venv
+if [ -e ~/venv ]; then
+    echo "~/venv already exists. Skipping creation."
+else
+    echo "Creating ~/venv"
+    python3 -m venv ~/venv
+fi
 
 # TODO: set up other dotfiles
 # Set .vimrc and .tmux.conf to be the ones from this project.
