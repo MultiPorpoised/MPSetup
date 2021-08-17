@@ -2,9 +2,12 @@
 # Temporarily set working directory to MPSetup root
 pushd "${BASH_SOURCE%/*}/" > /dev/null || exit
 
-# TODO: install necessary packages
 sudo apt-get update
-sudo apt-get install python3 python3-venv
+sudo apt-get install git curl python3 python3-venv python3-pip software-properties-common apt-file
+sudo apt-get update # update again to fill apt-file cache
+
+# Set up system-wide python libraries (e.g. those used by vim)
+pip3 install wheel
 
 # Set up default venv
 if [ -e ~/venv ]; then
@@ -12,9 +15,12 @@ if [ -e ~/venv ]; then
 else
     echo "Creating ~/venv"
     python3 -m venv ~/venv
+    . ~/venv/bin/activate
+    pip3 install wheel
+    deactivate
 fi
 
-# TODO: set up other dotfiles
+# TODO: set up other dotfiles (e.g. bashrc)
 # Set .vimrc and .tmux.conf to be the ones from this project.
 # Does not modify the files if they already exist.
 for FILE in .vimrc .tmux.conf; do
@@ -25,6 +31,14 @@ for FILE in .vimrc .tmux.conf; do
         ln -s $(pwd)/$FILE ~/$FILE
     fi
 done
+
+if [ -e ~/.vim/bundle/Vundle.vim ]; then
+    echo "Vundle already installed, skipping clone"
+else
+    echo "Setting up Vundle"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+echo "\n" | vim +PluginInstall! +qall
 
 # Return working directory to previous state
 popd > /dev/null

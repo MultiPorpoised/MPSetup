@@ -14,13 +14,13 @@ if isdirectory(expand('$HOME/.vim/bundle/Vundle.vim'))
 
   " Extra plugins, which can be configured with Vundle commands
   " like :PluginInstall
-  Plugin 'altercation/vim-colors-solarized'
-  Plugin 'google/vim-codefmt'
-  Plugin 'scrooloose/nerdcommenter'
   Plugin 'tpope/vim-sensible'
-  Plugin 'Valloric/MatchTagAlways'
+  Plugin 'altercation/vim-colors-solarized'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'scrooloose/nerdcommenter'
+  Plugin 'google/vim-maktaba'
+  Plugin 'google/vim-codefmt'
 
   " All of your Plugins must be added before the following line
   call vundle#end()
