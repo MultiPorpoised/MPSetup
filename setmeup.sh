@@ -20,10 +20,9 @@ else
     deactivate
 fi
 
-# TODO: set up other dotfiles (e.g. bashrc)
-# Set .vimrc and .tmux.conf to be the ones from this project.
+# Set .vimrc, .tmux.conf, and .bashrc to be the ones from this project.
 # Does not modify the files if they already exist.
-for FILE in .vimrc .tmux.conf; do
+for FILE in .vimrc .tmux.conf .bashrc; do
     if [ -e ~/$FILE ]; then
         echo "~/$FILE already exists. If you wish to overwrite it, first remove it."
     else
