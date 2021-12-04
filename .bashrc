@@ -92,3 +92,7 @@ fi
 function gsl() {
 	git log --graph --decorate --all --pretty=format:'%C(auto)%h -%d %C(bold)%s%Creset %C(green)(%cr) %C(cyan)%aN'
 }
+
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi

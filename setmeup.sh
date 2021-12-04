@@ -3,7 +3,7 @@
 pushd "${BASH_SOURCE%/*}/" > /dev/null || exit
 
 sudo apt-get update
-sudo apt-get install git curl python3 python3-venv python3-pip software-properties-common apt-file
+sudo apt-get install git curl python3 python3-venv python3-pip software-properties-common apt-file libnss3
 sudo apt-get update # update again to fill apt-file cache
 
 # Set up system-wide python libraries (e.g. those used by vim)
@@ -18,6 +18,14 @@ else
     . ~/venv/bin/activate
     pip3 install wheel
     deactivate
+fi
+
+# Set up Rust if it isn't already available
+if [ -z $(which cargo) ]; then
+    if [ -z $(which rustup) ]; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    fi
+    rustup update
 fi
 
 # Set .vimrc, .tmux.conf, and .bashrc to be the ones from this project.
